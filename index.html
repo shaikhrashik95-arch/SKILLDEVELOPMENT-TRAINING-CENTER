@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Electrician Experience Certificate Sample | Rashikul Rahaman Shaikh</title>
+
+<meta name="description" content="Sample electrician experience certificate for Rashikul Rahaman Shaikh. West Bengal, Nadia. Demonstration only, not an official certificate.">
+
+<meta name="robots" content="index,follow">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:18px;
+  font-family:Arial,sans-serif;
+  background:#edf1f6;
+  color:#183b62;
+}
+main{
+  max-width:850px;
+  margin:auto;
+  background:#fff;
+  padding:24px;
+  border:7px double #183b62;
+  text-align:center;
+}
+.inner{
+  border:1px solid #b59a57;
+  padding:20px;
+}
+.sample{
+  display:inline-block;
+  border:2px solid #c21e1e;
+  color:#c21e1e;
+  padding:9px;
+  font-weight:bold;
+}
+h1{font-size:28px}
+.name{font-size:25px;font-weight:bold}
+.details{
+  max-width:550px;
+  margin:20px auto;
+  text-align:left;
+  line-height:1.9;
+  overflow-wrap:anywhere;
+}
+#qrcode{
+  display:flex;
+  justify-content:center;
+  margin:20px auto;
+}
+button{
+  padding:12px 18px;
+  background:#183b62;
+  color:white;
+  border:0;
+  border-radius:5px;
+  margin:5px;
+}
+.notice{color:#b21f1f;font-size:13px;line-height:1.6}
+img{max-width:100%;height:auto}
+@media print{
+  body{padding:0;background:white}
+  button{display:none}
+  main{border:5px double #183b62}
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<h1>SKILLS & TECHNICAL TRAINING</h1>
+<p>Illustrative Certificate Design</p>
+<hr>
+০ 
+<h2>EXPERIENCE CERTIFICATE</h2>
+<p>This is a sample draft for</p>
+
+<div class="name">Rashikul Rahaman Shaikh</div>
+
+<div class="12details">
+<p><b>Father's Name:</b> Arman Shaikh</p>
+<p><b>Trade:</b> Electrician</p>
+<p><b>Experience:</b> 2 Years (unverified claim)</p>
+<p><b>State:</b> West Bengal, India</p>
+<p><b>District:</b> Nadia</p>
+<p><b>Sample Company:</b>  Electrical Services (fictional)</p>
+<p><b>Employment Dates:</b> To be verified by employer</p>
+<p><b>Certificate Status:</b> Draft only</p>
+</div>
+
+<hr>
+
+<h3>QR Code — Sample Webpage</h3>
+<p>Scan this QR Code to open this page.</p>
+<div id="qrcode"></div>
+<p id="qrstatus">Loading QR Code...</p>
+
+<button onclick="makeQR()">Generate QR Code</button>
+<button onclick="window.print()">Print / Save PDF</button>
+
+<p class="notice">
+This is an unofficial demonstration. It is not issued,
+verified or endorsed by Skill India, any government body
+or the sample company. No proof of employment or qualification.
+</p>
+
+</div>
+</main>
+
+<script>
+function makeQR(){
+  const box=document.getElementById("qrcode");
+  const status=document.getElementById("qrstatus");
+  box.innerHTML="";
+
+  if(location.protocol==="file:"){
+    status.textContent=
+      "Upload this file to GitHub Pages first. Then open the published HTTPS URL.";
+    return;
+  }
+
+  if(!/^https?:$/.test(location.protocol)){
+    status.textContent="Open the published webpage to create its QR Code.";
+    return;
+  }
+
+  if(typeof QRCode==="undefined"){
+    status.textContent="QR library could not load. Check your internet connection.";
+    return;
+  }
+
+  new QRCode(box,{
+    text:location.href,
+    width:190,
+    height:190,
+    correctLevel:QRCode.CorrectLevel.M
+  });
+
+  status.textContent="QR Code points to this webpage: "+location.href;
+}
+
+const script=document.createElement("script");
+script.src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+script.onload=makeQR;
+script.onerror=()=>{
+ document.getElementById("qrstatus").textContent=
+ "QR library failed to load. Check your internet connection.";
+};
+document.head.appendChild(script);
+</script>
+
+</body>
+</html>
