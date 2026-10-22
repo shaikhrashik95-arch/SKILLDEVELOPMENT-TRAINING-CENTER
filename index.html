@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificate Image</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      background: #eef4fb;
+      color: #111827;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .certificate {
+      display: block;
+      width: 100%;
+      max-width: 1536px;
+      height: auto;
+      margin: 0 auto;
+    }
+    .barcode-section {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 18px 12px 24px;
+      background: #fff;
+    }
+    .barcode-section h2 {
+      margin: 4px 0 12px;
+      font-size: 18px;
+    }
+    #barcode {
+      display: block;
+      width: 100%;
+      max-width: 580px;
+      height: 100px;
+      margin: 0 auto;
+    }
+    .note {
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+    a { color: #173e72; }
+    .download {
+      padding: 10px 16px;
+      margin-top: 8px;
+      border: 0;
+      border-radius: 6px;
+      background: #173e72;
+      color: white;
+      font-size: 15px;
+    }
+    .error { color: #a11; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <!-- Keep the existing certificate image, including its working right-side QR code. -->
+  <img class="certificate" src="certificate.png" alt="Certificate">
+
+  <section class="barcode-section">
+    <h2>Certificate Document</h2>
+    <svg id="barcode" role="img" aria-label="Barcode linking to the online certificate"></svg>
+    <p class="note">Scan this barcode to open the online certificate page:</p>
+    <p class="note">
+      <a href="https://shaikhrashik95-arch.github.io/SKILLDEVELOPMENT-TRAINING-CENTER/">
+        Open Certificate Online
+      </a>
+    </p>
+    <button class="download" type="button" onclick="downloadBarcode()">Download New Barcode</button>
+    <p id="status" class="error" hidden></p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+  <script>
+    const certificateURL =
+      "https://shaikhrashik95-arch.github.io/SKILLDEVELOPMENT-TRAINING-CENTER/";
+
+    function makeBarcode() {
+      if (typeof JsBarcode === "undefined") {
+        document.getElementById("status").hidden = false;
+        document.getElementById("status").textContent =
+          "Barcode library could not load. Connect to the internet and reload this page.";
+        return;
+      }
+      JsBarcode("#barcode", certificateURL, {
+        format: "CODE128",
+        lineColor: "#000000",
+        background: "#ffffff",
+        width: 1.5,
+        height: 70,
+        displayValue: true,
+        fontSize: 11,
+        margin: 10
+      });
+    }
+
+    function downloadBarcode() {
+      const svg = document.getElementById("barcode");
+      if (!svg || !svg.querySelector("path")) {
+        alert("Barcode is not ready. Please reload the page with internet access.");
+        return;
+      }
+      const data = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "new-certificate-barcode.svg";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    makeBarcode();
+  </script>
+</body>
+</html>
